@@ -19,6 +19,8 @@
 int main()
 {
 
+    calculator calc = calculator();
+
     //Todo Create advanced history with file saving, read out array and write calculations to file
 
     constexpr int size = 5;
@@ -36,7 +38,8 @@ int main()
     std::uniform_int_distribution<> dis(0, 9);
 
     const int rdm_index = dis(gen);
-
+    auto history = calc.getHistory();
+    auto messages = calc.greetUser();
     std::string userinput;
     std::regex const pattern(R"(^[-+]?[0-9]*\.?[0-9]+[+\-*/][-+]?[0-9]*\.?[0-9]+$)");
 
@@ -46,14 +49,17 @@ int main()
 
 
     //Beginning the Main Loop , Fix line spamming while retrieving inputStream dataTypes and calc() function
-
     while(true) {
         std::getline(std::cin, userinput);
         //Checking for the abort command, before checking for regex condition
-        if(userinput.contains("abort")) {
+        if(userinput.contains("abort") || userinput.contains("exit")) {
             std::cout << "Thank you for using my calculator\nCalculator will shut down now\nPress enter to continue";
             std::cin.ignore();
             break;
+        }
+        if(userinput.contains("history") || userinput.contains("h")) {
+                //Is meant to call the getHistory() function and interate over it to print out all results
+                std::cout << "Damn you found a not yet implemented function!" << std::endl;
         }
         //Check if userinput matches condition, only contains mathematical expressions
         if(std::regex_match(userinput, pattern)) {
@@ -62,18 +68,18 @@ int main()
             double a {0};
             double b {0};
             double result {0};
-            //Looping through the userinput stream obtaining the doubles and char
+            //Iterating through the userinput stream obtaining the doubles and char
             while(inputStream >> a) {
                 if(inputStream >> op >> b) {
                         //Calls the calc() function and checks for the first calculation
-                        result = calc(a,op,b);
+                        result = calculator::calculate(a,op,b);
                 } else {
                     break;
                 }
 
-                //Simple History - Move this part into a separate function
+                //Simple History - Move this logic part into calculator.cpp
                 if(result >=100000000) {
-                    std::cout << std::fixed << std::setprecision(2);
+                    std::cout << std::fixed << std::setprecision(1);
                 } else {
                     std::cout << std::fixed << std::setprecision(0);
                 }
@@ -81,7 +87,7 @@ int main()
                 std::get<1>(historytuple[0]) = op;
                 std::get<2>(historytuple[0]) = b;
                 std::get<3>(historytuple[0]) = result;
-                std::cout << "The result is: " << result << "\nHistory: " << std::get<0>(historytuple[0]) << std::get<1>(historytuple[0]) << std::get<2>(historytuple[0]) << "=" << std::get<3>(historytuple[0]) << std::endl;
+                std::cout << "The result is: " << result << std::endl;
                 std::cout << "Type 'abort' to exit the calculator" << std::endl;
             }
 

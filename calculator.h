@@ -1,6 +1,6 @@
 //
-// Created by Krankfried on 09.10.24.
-// Copyright (c) 2024 All rights reserved.
+// This software is licensed under the GNU General Public License.
+// Created by Krankfried.
 //
 
 #ifndef CALCULATOR_H
@@ -20,12 +20,18 @@ std::tuple<double, char, double, double> calc_history;
 
 
 public:
- [[nodiscard]] std::tuple<double, char, double, double> getHistory() const{
+    [[nodiscard]] std::tuple<double, char, double, double> getHistory() const{
      return calc_history;
  }
- [[nodiscard]] std::array<std::string, 9> greetUser() const {
+    void setHistory(const std::tuple<double, char, double, double>& history) {
+        calc_history = history;
+    }
+    [[nodiscard]] std::array<std::string, 9> greetUser() const {
     return messages;
  }
+    static double calculate(double r1, char op, double r2) {
+        return ::calc(r1, op, r2);
+    }
 };
 
 

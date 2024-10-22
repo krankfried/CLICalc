@@ -33,6 +33,7 @@ double calc(double r1, char op, double r2) {
     }
 }
 
+//getHistory und SetHistory sowie Randomizer Welcome Message, Motd etc. in eine Getter/Setter verschieben.
 std::tuple<double, char, double> getHistory {
 
 };
