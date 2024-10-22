@@ -1,7 +1,6 @@
 //Created by krankfried, for personal learning purposes
 #include <iostream>
 #include <fstream>
-#include <filesystem>
 #include <tuple>
 #include <string>
 #include <array>
@@ -15,33 +14,16 @@
 //Todo Create a more advanced history and update history within the calc() function by accessing the tuple by reference
 //Todo New Project: Simple Notes Program with buffer saving to file
 
-/*class Calcs{
-public:
-    std::tuple<double, char , double, double>  historytuple[size];
-};
-*/
+
+
 int main()
 {
-   // Calcs calcs;
-    /*std::array<bool, 4> test = {
-            true, false, false, true
-    };
-    if(test[1]) {
-
-    }
-
-
-
-    /* std::vector<std::tuple<double, char, double, double>> history;
-    history.resize(size);
-    */
 
     //Todo Create advanced history with file saving, read out array and write calculations to file
 
     constexpr int size = 5;
 
     std::tuple<double, char , double, double>  historytuple[size];
-   // [[maybe_unused]] std::tuple<double, char, double, double>* lastcarrayptr = historytuple;
     [[maybe_unused]] bool calcmode {false};
     std::array<std::string, 10> motd = {
             "Why don't scientists trust atoms?\nBecause they make up everything!", "Why did the scarecrow win an award?\nBecause he was outstanding in his field!", "Why don't skeletons fight each other?\nThey don't have the guts!", "Why did the bicycle fall over?\nBecause it was two-tired!", "What do you call fake spaghetti?\nAn impasta!",
@@ -58,7 +40,6 @@ int main()
     std::string userinput;
     std::regex const pattern(R"(^[-+]?[0-9]*\.?[0-9]+[+\-*/][-+]?[0-9]*\.?[0-9]+$)");
 
-
     std::cout << "Hello, welcome to the Simple CLI Calculator by Krankfried\n" << motd[rdm_index] << std::endl;
     std::cout << "Example Use: 200+200" << std::endl;
 
@@ -70,7 +51,7 @@ int main()
         std::getline(std::cin, userinput);
         //Checking for the abort command, before checking for regex condition
         if(userinput.contains("abort")) {
-            std::cout << "Calculator will shut down now\nPress enter to continue";
+            std::cout << "Thank you for using my calculator\nCalculator will shut down now\nPress enter to continue";
             std::cin.ignore();
             break;
         }
@@ -89,19 +70,23 @@ int main()
                 } else {
                     break;
                 }
-               // asm("mov byte %ptr, %eax");
+
                 //Simple History - Move this part into a separate function
-                std::cout << std::fixed << std::setprecision(2);
+                if(result >=100000000) {
+                    std::cout << std::fixed << std::setprecision(2);
+                } else {
+                    std::cout << std::fixed << std::setprecision(0);
+                }
                 std::get<0>(historytuple[0]) = a;
                 std::get<1>(historytuple[0]) = op;
                 std::get<2>(historytuple[0]) = b;
                 std::get<3>(historytuple[0]) = result;
-                std::cout << "Das Ergebnis lautet: " << result << "\nHistory: " << std::get<0>(historytuple[0]) << std::get<1>(historytuple[0]) << std::get<2>(historytuple[0]) << "=" << std::get<3>(historytuple[0]) << std::endl;
+                std::cout << "The result is: " << result << "\nHistory: " << std::get<0>(historytuple[0]) << std::get<1>(historytuple[0]) << std::get<2>(historytuple[0]) << "=" << std::get<3>(historytuple[0]) << std::endl;
                 std::cout << "Type 'abort' to exit the calculator" << std::endl;
             }
 
         } else {
-            std::cout << "Du kannst nur Mathematische Zeichen benutzen" << std::endl;
+            std::cout << "You may only use simple mathematical expressions (+-*/)" << std::endl;
         }
     }
 
