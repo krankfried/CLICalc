@@ -11,6 +11,7 @@ What's Next?
 I’ve got some big plans! Here’s what I hope to add soon:
 
     Multiple Calculations: So you won’t be limited to just one calculation at a time.
+    Scientific Mode: For more advanced calculations!
     GUI: Thinking about adding a graphical interface to make it look cool and be even easier to use, but thats a big topic on its own to dive into i suppose!
-I haven't and will not use ai for this code in the future, because it feels like i teach myself to rely on the ai to help me out every time, that's not what i want to achieve!
-I’m really looking forward to building this out more and learning as I go. Feel free to check it out, try it out, and share any feedback – I’d love to hear what you think! 
+    
+I haven't used AI for this code, and I don’t plan to in the future. Relying on AI to solve my problems isn't the path I want to take—I want to learn and grow on my own. I'm excited to keep building this project and learning along the way. Feel free to check it out, give it a try, and share any thoughts you have. I'd really like to hear what you think!"
